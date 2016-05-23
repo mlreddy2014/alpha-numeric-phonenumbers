@@ -10,7 +10,7 @@
       <div class="generic-container" ng-controller="PhoneController as ctrl">
           <div  ng-hide="ctrl.loginSuccess"  class="panel panel-default">
               <div class="panel-heading"><span class="lead">Phone Number to Alphanumeric application </span></div>
-               <div class="panel-heading"><span class="lead">Message(valid password:test123 and  mail ids :testlimba@gmail.com or testreddy@gmail.com  ):{{ctrl.loginFailureMessage}} </span></div>
+               <div class="panel-heading"><span class="lead">Message(validpassword:test123 and  mailid: finra.es.test@gmail.com) {{ctrl.loginFailureMessage}} </span></div>
            
               <div class="formcontainer">
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
