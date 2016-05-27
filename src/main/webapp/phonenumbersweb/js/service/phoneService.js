@@ -4,6 +4,8 @@ App.factory('PhoneService', ['$http', '$q', function($http, $q){
 
 	return {
 		
+		// This service will return all the phone numbers list 
+		
 		fetchPhoneNumberList: function(phoneNumber) {
     		 return $http.get('/phonenumbers/'+phoneNumber)
 			.then(
@@ -16,6 +18,7 @@ App.factory('PhoneService', ['$http', '$q', function($http, $q){
 					}
 			);
 	        },
+	        // This service will return the phone numbers list from Restfull service paginatation ( in json format)
 	        fetchSubPhoneNumberList: function(phoneNumberPara,pageNumber) {
 	        	console.log(' sub phoneNumber:'+phoneNumberPara);
 	        	console.log(' sub pageNumber:'+pageNumber);
@@ -33,15 +36,17 @@ App.factory('PhoneService', ['$http', '$q', function($http, $q){
 						}
 				);
 		          },
+		          
+		          // This for form level validation service (poc is used for only user name exist or not validation)
 		    validateUser: function(user){
 				return $http.post('/loginuser', user)
 						.then(
 								function(response){
-									console.log('Success validating user:  '+response.status);
+									console.log('Success validating user name:  '+response.status);
 									return response;// ok 200 should be
 								}, 
 								function(errResponse){
-									console.error('Validating user Failed: '+errResponse.status);
+									console.error('Validating user name Failed: '+errResponse.status);
 									return $q.reject(errResponse);// no data 404 found
 								}
 						);
