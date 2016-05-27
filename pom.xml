@@ -101,7 +101,8 @@
 
     <build>
         <!-- for hot reload of the web application-->
-        <sourceDirectory>${project.basedir}/src/</sourceDirectory>
+        <sourceDirectory>${project.basedir}/src/main/</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/</testSourceDirectory>
         <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
         <plugins>
             <plugin>

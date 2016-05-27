@@ -15,9 +15,15 @@ import com.finra.phonenumbers.model.PhoneNumbers;
 
 
 /**
+ * 
+ *  
  * @author LIMBA_2
- *
+ *  
+ *  This is class is for implementation service layer for phone numbers generation service as  part of POC
+ *  
  */
+
+
 @Service("phoneService")
 public class PhoneServiceImpl implements PhoneService {
 	private final static Logger LOG = Logger.getLogger(PhoneNumbersController.class);	
@@ -58,8 +64,9 @@ public class PhoneServiceImpl implements PhoneService {
 		LOG.debug("Old List size:"+ phoneCache.get(phoneNumber).size());
 	}
 
-	/**
+	/**This is the core method for generating get from cache or getting generated all the list
 	 * 
+	 *  
 	 */
 	@Override
 	public PhoneNumbers getPhonesByPageNumber(String phoneNumber, int pageNumber) {
@@ -81,7 +88,7 @@ public class PhoneServiceImpl implements PhoneService {
 		return phoneNumbers;
 	}
 	
-	/**
+	/** This is the core method for generating the phone alphanumeric phone numbers
 	 * @param originalPhoneNumber
 	 * @param index
 	 * @param comobresults

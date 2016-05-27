@@ -38,7 +38,7 @@ public class PhoneNumberUserTest {
 
 	@Test
 	public void testUserMailExist() {
-		User userT = new User(1, "LIMBA", "1234567", "testlimba@gmail.com",
+		User userT = new User(1, "LIMBA", "1234567", "finra.es.test@gmail.com",
 				"test123");// 7
 		Assert.isTrue(userService.isUserExist(userT));
 	}

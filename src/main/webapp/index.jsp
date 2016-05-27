@@ -1,23 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
-  <head>  
-    <title>Phone Number to Alphanumeric application </title>  
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-     <link href="<c:url value='/phonenumbersweb/css/app.css' />" rel="stylesheet"></link>
+<head>  
+ <title>Phone Number to Alphanumeric application WITH GOOGLE API INTEGRATION </title>  
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ <link href="<c:url value='/phonenumbersweb/css/app.css' />" rel="stylesheet"></link>
+ <link href="<c:url value='/phonenumbersweb/css/google-plus-signin.css' />" rel="stylesheet"></link>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+ 
+ <SCRIPT>
+  $(document).ready(function(){
+	    $("#phoneNumberAnch").click(function(){
+	   
+	    	$("#mainFormId").show();
+	    });
+	});
+  
+ </SCRIPT>
+ 
+      
   </head>
   <body ng-app="PhoneApp" class="ng-cloak">
-      <div class="generic-container" ng-controller="PhoneController as ctrl">
-          <div  ng-hide="ctrl.loginSuccess"  class="panel panel-default">
-              <div class="panel-heading"><span class="lead">Phone Number to Alphanumeric application </span></div>
-               <div class="panel-heading"><span class="lead">Message(validpassword:test123 and  mailid: finra.es.test@gmail.com) {{ctrl.loginFailureMessage}} </span></div>
+  <div class="generic-container" ng-controller="PhoneController as ctrl">
+      
+       <div class="panel-heading"><span class="lead">Phone Number to Alphanumeric application </span></div>
+        
+       <div class="formcontainer">
+       <div  ng-hide="ctrl.formSuccess"   class="panel panel-default" >
+ 
+          	  <!--   GOOGLE API INTEGRATION COD START HERE -->
+          	<div class="span6">
+  			<google-plus-signin clientid="105307145142-u9gfd5nf8kboof1jjf7cr33ru9m0441i.apps.googleusercontent.com"></google-plus-signin>
+  			<p>^ This is a Google sign-in button</p>
+  			
+  		<div  ng-show="signedInStatus" >
+  		  <a href="" id="phoneNumberAnch" >  Show Phone Number Entry form </a>
+  		</div>	
+			</div>
+               <!--   GOOGLE API INTEGRATION COD  ENDS HERE -->
+      </div>
+      </div>
+          
+  <div style="display:none"  id="mainFormId" ng-hide="!signedInStatus"  class="panel panel-default" >        
+          <div  ng-hide="ctrl.formSuccess"  class="panel panel-default">
+           <div class="panel-heading"><span class="lead">Message : For form level validation purpose used **USER NAME** field in this POC please enter  ***** USER NAMES: LIMBAREDDY  OR   TESTFINRA  ********** {{ctrl.formFailureMessage}}</span></div>
            
+      
               <div class="formcontainer">
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                       <input type="hidden" ng-model="ctrl.user.id" />
                       <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="file">Name</label>
+                              <label class="col-md-2 control-lable" for="file">User Name</label>
                               <div class="col-md-7">
                                   <input type="text" ng-model="ctrl.user.username" name="uname" class="username form-control input-sm" placeholder="Enter your name" required ng-minlength="8"   max="16"     />
                                   <div class="has-error" ng-show="myForm.$dirty">
@@ -47,12 +82,11 @@
                               </div>
                           </div>
                       </div>
-
                       <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="file">Email</label>
                               <div class="col-md-7">
-                                  <input type="email" ng-model="ctrl.user.email" name="email" class="email form-control input-sm" placeholder="Enter your Email" required  max="20" />
+                                  <input type="email"  ng-disabled="true" ng-model="ctrl.user.email" name="email" class="email form-control input-sm" placeholder="Enter your Email" required  max="20" />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.email.$error.required">This is a required field</span>
                                       <span ng-show="myForm.email.$invalid">This field is invalid </span>
@@ -62,35 +96,21 @@
                           </div>
                       </div>
                       <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="file">Password</label>
-                              <div class="col-md-7">
-                                  <input type="password" ng-model="ctrl.user.password" name="password" class="password form-control input-sm" placeholder="Enter Password" required ng-minlength="7"   max="16"     />
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.password.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.password.$error.minlength">Minimum length required is 8</span>
-                                      <span ng-show="myForm.password.$invalid">invalid password </span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="row">
                      
                           <div class="form-actions floatRight">
-                              <input type="submit"  value="Login" class="btn btn-primary btn-sm" ng-disabled="(!(ctrl.user.phone.length  ==7 || ctrl.user.phone.length  ==10 ))   || (myForm.$invalid )   ">
-                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                              <input type="submit"  value="Submit Phone Form" class="btn btn-primary btn-sm" ng-disabled="(!(ctrl.user.phone.length  ==7 || ctrl.user.phone.length  ==10 ))   || (myForm.$invalid )   ">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Phone Form</button>
                           </div>
                       </div>
                   </form>
               </div>
           </div>
-          <div ng-show="ctrl.loginSuccess"  class="panel panel-default">
+          <div ng-show="ctrl.formSuccess"  class="panel panel-default">
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">Phone Numbers</span></div>
               <div class="panel-heading"><span class="lead">{{ctrl.countmessage}}</span></div>
               <div class="tablecontainer">
-               <button  ng-click="ctrl.reset();ctrl.loginSuccess=false"> Back to Login  </button>
+               <button  ng-click="ctrl.reset();ctrl.formSuccess=false"> Back to Phone Entry Form  </button>
         	        
                 <button ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.getSubPhoneNumberList(ctrl.user.phone,ctrl.currentPage-1);ctrl.currentPage=ctrl.currentPage-1">
         		Previous  </button>
@@ -122,10 +142,14 @@
                   </table>
               </div>
           </div>
-      </div>
+  </div>
+   </div>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
       <script src="<c:url value='/phonenumbersweb/js/app.js' />"></script>
       <script src="<c:url value='/phonenumbersweb/js/service/phoneService.js' />"></script>
       <script src="<c:url value='/phonenumbersweb/js/controller/phoneController.js' />"></script>
+      <script src="<c:url value='/phonenumbersweb/js/google-plus-signin.js' />"></script>
+ 
+      
   </body>
 </html>

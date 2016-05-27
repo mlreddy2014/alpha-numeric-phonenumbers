@@ -12,8 +12,11 @@ import com.finra.phonenumbers.model.User;
 
 /**
  * @author LIMBA_2
- *
+ *  
+ *  This is class is for implementation service layer for data validations or any other services as POC
+ *  
  */
+
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -59,8 +62,7 @@ public class UserServiceImpl implements UserService {
 	public User findByMailIdPassword(User user) {
 		User usr = null;
 		for (User userLocal : users) {
-			if (userLocal.getEmail().equalsIgnoreCase(user.getEmail())
-					& userLocal.getPassword().equals(user.getPassword())) {
+			if (userLocal.getUsername().equalsIgnoreCase(user.getUsername())) {
 				usr = user;
 				break;
 			}
@@ -73,12 +75,20 @@ public class UserServiceImpl implements UserService {
 		return findByMailIdPassword(user) != null;
 	}
 
+	/*
+	 * THIS DATA IS JUST USED FOR FORM LEVEL FIELDS VALIDATIONS AS PART OF THE
+	 * POC nothing to do with google api validations
+	 */
+
+	/**
+	 * @return User
+	 */
 	private static List<User> populateDummyUsers() {
 		List<User> users = new ArrayList<User>();
-		users.add(new User(counter.incrementAndGet(), "LIMBA", "1234567",
+		users.add(new User(counter.incrementAndGet(), "LIMBAREDDY", "1234567",
 				"finra.es.test@gmail.com", "test123"));// 7
-		users.add(new User(counter.incrementAndGet(), "REDDY", "1234567890",
-				"testreddy@gmail.com", "test123")); // 10
+		users.add(new User(counter.incrementAndGet(), "TESTFINRA",
+				"1234567890", "testreddy@gmail.com", "test123")); // 10
 		return users;
 	}
 
